@@ -1,0 +1,5 @@
+scopes:
+    - name: app
+      description: application code and UI components
+    - name: workers
+      description: Cloudflare worker implementation
