@@ -1,10 +1,5 @@
 @import "tailwindcss" source(".");
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
 :root {
   --c-white: #f4f5f0;
   --c-black: #111111;
@@ -23,10 +18,8 @@
   --grid-size: 20px;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+html {
+  overflow-x: hidden;
 }
 
 body {
@@ -34,19 +27,30 @@ body {
   font-family: var(--font-body);
   color: var(--c-black);
   -webkit-font-smoothing: antialiased;
-  padding: 1vw;
+  padding: clamp(4px, 1vw, 16px);
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
+}
+
+/* ── Focus Visible ── */
+
+.plugin-item:focus-visible,
+.hero-badge:focus-visible,
+.hero-giant-circle:focus-visible {
+  outline: 3px solid var(--c-yellow);
+  outline-offset: 2px;
 }
 
 /* ── Poster Board Grid ── */
 
 .poster-board {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, minmax(45vw, auto));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(min(45vw, 600px), auto));
   gap: 6px;
   background-color: var(--c-black);
   border: var(--border-thick);
@@ -54,12 +58,16 @@ body {
   max-width: 1800px;
 }
 
+/* ── Tablet: 2-column ── */
+
 @media (max-width: 1200px) {
   .poster-board {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto;
   }
 }
+
+/* ── Mobile: single column ── */
 
 @media (max-width: 768px) {
   .poster-board {
@@ -76,6 +84,8 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 0;
+  container-type: inline-size;
   background-image: linear-gradient(
       rgba(17, 17, 17, 0.15) 1px,
       transparent 1px
@@ -118,7 +128,7 @@ body {
 /* ── Hero Panel ── */
 
 .hero-content {
-  padding: 1.5rem;
+  padding: clamp(0.75rem, 3cqw, 1.5rem);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -135,7 +145,7 @@ body {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-size: clamp(2rem, 14cqw, 6rem);
   line-height: 0.85;
   text-transform: uppercase;
   letter-spacing: -2px;
@@ -145,14 +155,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(3rem, 6vw, 5rem);
-  height: clamp(3rem, 6vw, 5rem);
+  width: clamp(2rem, 8cqw, 5rem);
+  height: clamp(2rem, 8cqw, 5rem);
   border: var(--border-thick);
   border-radius: 50%;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1rem, 4cqw, 2.5rem);
   background: var(--c-white);
-  margin-left: 1rem;
+  margin-left: 0.75rem;
   flex-shrink: 0;
   text-decoration: none;
   color: inherit;
@@ -169,21 +179,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: clamp(0.75rem, 4cqw, 2rem);
 }
 
 .hero-giant-circle {
   display: block;
   width: 100%;
-  max-width: 300px;
+  max-width: clamp(100px, 38cqw, 380px);
   aspect-ratio: 1;
-  border: 8px solid var(--c-black);
+  border: clamp(6px, 2cqw, 12px) solid var(--c-black);
   border-radius: 50%;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .hero-giant-circle:hover {
-  background-color: var(--c-black);
+  background-color: var(--c-coral);
+  border-color: var(--c-coral);
   transform: scale(1.05);
 }
 
@@ -197,14 +209,14 @@ body {
 .hero-meta {
   display: flex;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: clamp(0.875rem, 2.5cqw, 1.5rem);
   font-weight: 900;
   margin-bottom: 0.2rem;
 }
 
 .hero-subtitle {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.5rem, 7cqw, 3.5rem);
   line-height: 1;
   letter-spacing: -1px;
 }
@@ -215,10 +227,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 1rem 1.5rem 0.2rem 1.5rem;
+  padding: 0.75rem clamp(1rem, 2vw, 1.5rem) 0.2rem;
   border-bottom: var(--border-thin);
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -1px;
 }
@@ -232,9 +245,10 @@ body {
 
 .panel-graphics {
   width: 100%;
-  height: 160px;
+  height: clamp(100px, 15vw, 160px);
   border-bottom: var(--border-thin);
   display: flex;
+  overflow: hidden;
 }
 
 .p-core .panel-graphics,
@@ -251,11 +265,12 @@ body {
 /* ── Plugin List ── */
 
 .plugin-list {
-  padding: 1.5rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: clamp(1rem, 2vw, 1.25rem);
   flex-grow: 1;
+  min-width: 0;
 }
 
 .plugin-item {
@@ -265,8 +280,9 @@ body {
   text-decoration: none;
   color: inherit;
   border-radius: 4px;
-  padding: 0.5rem;
-  margin: -0.5rem;
+  padding: 0.625rem;
+  margin: -0.625rem;
+  min-height: 44px;
   transition: background-color 0.2s ease;
 }
 
@@ -279,29 +295,35 @@ body {
   background-color: rgba(244, 245, 240, 0.1);
 }
 
+/* Desktop default: 3 lines — cmd / leader+name / desc */
 .plugin-row {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  min-width: 0;
 }
 
 .plugin-cmd {
-  white-space: nowrap;
-  font-size: 0.8rem;
+  width: 100%;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
   font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono",
     "Courier New", monospace;
   letter-spacing: -0.3px;
+  word-break: break-word;
+  min-width: 0;
 }
 
 .leader-line {
   flex-grow: 1;
   height: 2px;
   background-color: currentColor;
-  margin: 0 12px;
+  margin-right: clamp(6px, 1vw, 12px);
   opacity: 0.8;
+  min-width: 20px;
 }
 
 .plugin-name {
@@ -309,6 +331,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
 }
 
 .link-arrow {
@@ -327,12 +350,253 @@ body {
 
 .plugin-desc {
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
   text-transform: none;
-  opacity: 0.85;
   padding-left: 0;
   text-align: right;
   max-width: 80%;
   align-self: flex-end;
   line-height: 1.3;
+}
+
+/* ══════════════════════════════════════════
+   TABLET REFINEMENTS (768px - 1200px)
+   ══════════════════════════════════════════ */
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  /* Tablet: 2 lines — cmd+leader+name / desc */
+  .plugin-row {
+    flex-wrap: nowrap;
+  }
+
+  .plugin-cmd {
+    width: auto;
+    flex-shrink: 1;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE (< 768px)
+   ══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  :root {
+    --border-thick: 4px solid var(--c-black);
+    --grid-size: 16px;
+  }
+
+  /* Always show link arrows on touch devices */
+  .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .plugin-item {
+    padding: 0.75rem;
+    margin: -0.75rem;
+  }
+
+  /* Mobile: 2 lines — cmd+name / desc */
+  .plugin-row {
+    flex-wrap: nowrap;
+  }
+
+  .plugin-cmd {
+    width: auto;
+    flex-shrink: 1;
+  }
+
+  .leader-line {
+    display: none;
+  }
+
+  .plugin-desc {
+    max-width: 100%;
+    text-align: left;
+    align-self: flex-start;
+  }
+}
+
+/* ══════════════════════════════════════════
+   SMALL MOBILE (< 480px)
+   ══════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .plugin-cmd {
+    font-size: 0.6rem;
+  }
+
+}
+
+/* ══════════════════════════════════════════
+   VERY SMALL (< 360px, e.g. iPhone SE)
+   ══════════════════════════════════════════ */
+
+@media (max-width: 360px) {
+  body {
+    padding: 2px;
+  }
+
+  .plugin-list {
+    padding: 0.75rem;
+  }
+
+  .panel-header {
+    padding: 0.5rem 0.75rem 0.2rem;
+    font-size: 1.25rem;
+  }
+
+  .plugin-cmd {
+    font-size: 0.6rem;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE LANDSCAPE
+   ══════════════════════════════════════════ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    align-items: flex-start;
+  }
+
+  .poster-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .hero-circle-container {
+    padding: 0.5rem;
+  }
+
+  .hero-giant-circle {
+    max-width: 120px;
+  }
+
+  .panel-graphics {
+    height: 80px;
+  }
+}
+
+/* ══════════════════════════════════════════
+   LARGE DESKTOP (> 1800px)
+   ══════════════════════════════════════════ */
+
+@media (min-width: 1800px) {
+  .poster-board {
+    grid-template-rows: repeat(2, minmax(500px, auto));
+  }
+
+  .panel-header {
+    font-size: 2.25rem;
+  }
+
+  .plugin-row {
+    font-size: 1.25rem;
+  }
+
+  .plugin-cmd {
+    font-size: 0.9rem;
+  }
+
+  .plugin-desc {
+    font-size: 0.95rem;
+  }
+
+}
+
+
+/* ══════════════════════════════════════════
+   TOUCH DEVICE DETECTION (pointer: coarse)
+   ══════════════════════════════════════════ */
+
+@media (pointer: coarse) {
+  .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .plugin-item {
+    padding: 0.75rem;
+    margin: -0.75rem;
+  }
+}
+
+/* ══════════════════════════════════════════
+   PRINT
+   ══════════════════════════════════════════ */
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+
+  .poster-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    border-color: #000;
+    gap: 2px;
+    max-width: 100%;
+  }
+
+  .panel {
+    background-image: none !important;
+    break-inside: avoid;
+  }
+
+  .p-core {
+    background-color: #eee;
+    color: #000;
+  }
+  .p-ui {
+    background-color: #ddd;
+    color: #000;
+  }
+
+  .hero-giant-circle {
+    max-width: 150px;
+    border-color: #000;
+  }
+
+  .hero-badge {
+    border-color: #000;
+  }
+
+  .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .plugin-item {
+    color: #000 !important;
+  }
+
+  .panel-header {
+    border-color: #000 !important;
+  }
+
+  .panel-graphics {
+    border-color: #000 !important;
+    height: 80px;
+  }
+}
+
+/* ══════════════════════════════════════════
+   NARROW PANEL — 3-line layout
+   Overrides tablet/mobile media query rules
+   ══════════════════════════════════════════ */
+
+@container (max-width: 480px) {
+  .plugin-row {
+    flex-wrap: wrap;
+  }
+
+  .plugin-cmd {
+    width: 100%;
+  }
+
+  .leader-line {
+    display: block;
+  }
 }
