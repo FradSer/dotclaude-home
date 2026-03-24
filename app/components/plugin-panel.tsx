@@ -24,10 +24,10 @@ export function PluginPanel({ panel, index }: PluginPanelProps) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="panel-header">
+      <h2 className="panel-header">
         <span>{panel.headerLeft}</span>
         <span>{panel.headerRight}</span>
-      </div>
+      </h2>
       <PanelGraphic panelId={panel.id} />
       <div className="plugin-list">
         {panel.plugins.map((plugin, i) => (

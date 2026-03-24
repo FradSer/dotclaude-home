@@ -35,6 +35,7 @@ export function PluginItem({ plugin, index, panelIndex }: PluginItemProps) {
             className="link-arrow"
             viewBox="0 0 12 12"
             fill="none"
+            aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
