@@ -6,6 +6,8 @@ export function CoreGraphic() {
     >
       <svg
         className="svg-graphic"
+        aria-hidden="true"
+        role="presentation"
         viewBox="0 0 200 80"
         preserveAspectRatio="none"
       >
@@ -31,6 +33,8 @@ export function DevGraphic() {
     <div className="panel-graphics">
       <svg
         className="svg-graphic"
+        aria-hidden="true"
+        role="presentation"
         viewBox="0 0 300 100"
         preserveAspectRatio="none"
       >
@@ -47,6 +51,8 @@ export function ReactEcoGraphic() {
     <div className="panel-graphics">
       <svg
         className="svg-graphic"
+        aria-hidden="true"
+        role="presentation"
         viewBox="0 0 400 100"
         preserveAspectRatio="none"
       >
@@ -76,21 +82,13 @@ export function ConfigGraphic() {
     <div className="panel-graphics">
       <svg
         className="svg-graphic"
+        aria-hidden="true"
+        role="presentation"
         viewBox="0 0 200 100"
         preserveAspectRatio="none"
       >
         <path d="M 0,50 A 50,50 0 0,1 100,50 Z" fill="var(--c-black)" />
-        <path
-          d="M 0,50 A 50,50 0 0,0 100,50 Z"
-          fill="var(--c-black)"
-          transform="translate(0, 50)"
-        />
-        <path
-          d="M 100,50 A 50,50 0 0,0 200,50 Z"
-          fill="var(--c-black)"
-          transform="translate(0, -50)"
-        />
-        <path d="M 100,50 A 50,50 0 0,1 200,50 Z" fill="var(--c-black)" />
+        <path d="M 100,50 A 50,50 0 0,0 200,50 Z" fill="var(--c-black)" />
       </svg>
     </div>
   );
@@ -101,6 +99,8 @@ export function ExtraGraphic() {
     <div className="panel-graphics">
       <svg
         className="svg-graphic"
+        aria-hidden="true"
+        role="presentation"
         viewBox="0 0 200 100"
         preserveAspectRatio="none"
       >

@@ -27,6 +27,7 @@ export function HeroPanel() {
             target="_blank"
             rel="noopener noreferrer"
             className="hero-badge"
+            aria-label="15 plugins — view repository on GitHub"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{
@@ -46,6 +47,7 @@ export function HeroPanel() {
             target="_blank"
             rel="noopener noreferrer"
             className="hero-giant-circle"
+            aria-label="View repository on GitHub"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{
