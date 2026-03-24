@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useI18n } from "../i18n";
 import type { Plugin } from "./plugin-data";
 
 interface PluginItemProps {
@@ -8,7 +9,9 @@ interface PluginItemProps {
 }
 
 export function PluginItem({ plugin, index, panelIndex }: PluginItemProps) {
+  const { t } = useI18n();
   const delay = panelIndex * 0.15 + index * 0.08;
+  const desc = t.plugins[plugin.name] ?? plugin.desc;
 
   return (
     <motion.a
@@ -48,7 +51,7 @@ export function PluginItem({ plugin, index, panelIndex }: PluginItemProps) {
           </svg>
         </span>
       </div>
-      <div className="plugin-desc">{plugin.desc}</div>
+      <div className="plugin-desc">{desc}</div>
     </motion.a>
   );
 }

@@ -1,8 +1,11 @@
 import { motion } from "motion/react";
+import { useI18n } from "../i18n";
 
 const REPO_URL = "https://github.com/FradSer/dotclaude";
 
 export function HeroPanel() {
+  const { lang, t, toggleLang } = useI18n();
+
   return (
     <motion.article
       className="panel p-hero"
@@ -27,7 +30,7 @@ export function HeroPanel() {
             target="_blank"
             rel="noopener noreferrer"
             className="hero-badge"
-            aria-label="15 plugins — view repository on GitHub"
+            aria-label={t.hero.badgeLabel}
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{
@@ -47,7 +50,7 @@ export function HeroPanel() {
             target="_blank"
             rel="noopener noreferrer"
             className="hero-giant-circle"
-            aria-label="View repository on GitHub"
+            aria-label={t.hero.circleLabel}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{
@@ -66,15 +69,18 @@ export function HeroPanel() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              MIT LIC.
+              {t.hero.license}
             </motion.span>
-            <motion.span
+            <motion.button
+              className="lang-switch"
+              onClick={toggleLang}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
+              aria-label={lang === "en" ? "Switch to Chinese" : "Switch to English"}
             >
-              EN / FR
-            </motion.span>
+              {lang === "en" ? "EN" : "ZH"}
+            </motion.button>
           </div>
           <motion.div
             className="hero-subtitle"
@@ -82,7 +88,7 @@ export function HeroPanel() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            CLAUDE CODE
+            {t.hero.subtitle}
           </motion.div>
         </div>
       </div>
